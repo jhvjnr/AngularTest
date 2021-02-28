@@ -1,8 +1,12 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
+    "skipLibCheck": true,
     "outDir": "../out-tsc/app",
-    "types": []
+    "types": [
+      "three",
+      "webgl2"
+    ]
   },
   "exclude": [
     "src/test.ts",
