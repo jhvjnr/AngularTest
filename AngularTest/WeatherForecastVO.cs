@@ -2,7 +2,7 @@ using System;
 
 namespace AngularTest
 {
-    public class WeatherForecast
+    public class WeatherForecastVO
     {
         public DateTime Date { get; set; }
 
