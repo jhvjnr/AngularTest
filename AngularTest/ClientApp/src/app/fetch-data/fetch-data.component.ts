@@ -2,6 +2,8 @@ import { AfterViewInit, Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import * as THREE from 'three';
+import {FlyControls} from 'three/examples/jsm/controls/FlyControls.js';
+import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
 
 @Component({
   selector: 'app-fetch-data',
@@ -52,23 +54,51 @@ export class FetchDataComponent implements AfterViewInit{
     //document.body.appendChild( renderer.domElement );
 
     var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-    var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+    var material = new THREE.MeshPhongMaterial( { color: 0x00ff00 } );
     var cube = new THREE.Mesh( geometry, material );
     scene.add( cube );
 
+
+    const color = 0xFFFFFF;
+    const intensity = 1;
+    const light = new THREE.PointLight(color, intensity);
+    light.position.set(-2, 2, 4);
+
+    const ambientLight = new THREE.HemisphereLight(color, 'darkslategrey', .1);
+
+    light.position.set(3,3,3);
+
+    scene.add(ambientLight);
+
+    scene.add(light);
+
+    scene.background = new THREE.Color( 0xADD8E6 );
+
+    let controls = new OrbitControls(camera,  renderer.domElement);
+
+    //camera control properties
+
+    controls.update();
     camera.position.z = 5;
+
 
     var animate = function () {
       requestAnimationFrame( animate );
-
-      cube.rotation.x += 0.01;
-      cube.rotation.y += 0.01;
-
+      controls.update();
+      // cube.rotation.x += 0.01;
+      // cube.rotation.y += 0.01;
       renderer.render( scene, camera );
     };
 
     animate();
   } ;
+
+
+
+
+
+  
+  
 
 
 }

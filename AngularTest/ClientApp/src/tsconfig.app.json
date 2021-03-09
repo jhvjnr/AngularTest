@@ -5,7 +5,8 @@
     "outDir": "../out-tsc/app",
     "types": [
       "three",
-      "webgl2"
+      "webgl2",
+      "node"
     ]
   },
   "exclude": [
